@@ -1,0 +1,239 @@
+---
+title: <center>"A package of knapsack problem solution using three algorithms"</center>
+author: <center>"Farhana chowdhury Tondra,Syeda Farha Shazmeen"</center>
+subtitle: <center>"farch587@student.liu.se, syesh076@student.liu.se"</center>
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A package of knapsack problem solution using three algothims}
+   %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}{inputenc}
+---
+
+**RCourseLab6** is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i with weights w~i. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package **RCourseLab** implements **brute force algorithm**,**dynamic programming** & **greedy heuristic approach**. 
+
+
+
+As usual to the other packages there is **/R** folder, where all three implemented algorithms are kept as .R file. **/Data** folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. **/test** folder contains implemented testcases for the functions. All .rd files are situdated inside **/man** folder and .Rmd file containing the vignette documentation is inside the **/vignettes** folder.
+
+
+
+#knapsack_objects:
+
+This file contains a dataframe where a number of items n, each with a weight w~i~ and a value v~i~.
+
+
+```{r}
+set.seed(42)
+n <- 2000
+knapsack_objects <-
+data.frame(
+w=sample(1:4000, size = n, replace = TRUE),
+v=runif(n = n, 0, 10000)
+)
+```
+
+data was saved by 
+
+```{r,eval=FALSE}
+#devtools::use_data("knapsack_objects", pkg="RCourseLab4")
+```
+
+And to load data , 
+
+```{r}
+#load("./knapsack_objects.rda")
+```
+
+
+#brute_force_knapsack()
+
+The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach is of complexity O(2^n^) since all possible combinations 2^n^ needs to be evaluated.
+
+This function takes a data frame X and a highest capacity W and returns the maximum knapsack value and the elements of it. The input values are non-negative integer values.
+
+```{r,eval=FALSE}
+ brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
+ brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
+ 
+  
+```
+
+When the n=12 and weight= 3500,
+
+```{r}
+library(RCourseLab6)
+brute_force_knapsack_8<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
+brute_force_knapsack_8
+
+```
+
+When the n=16, and weight= 3500,
+
+```{r}
+brute_force_knapsack_16<-system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
+brute_force_knapsack_16
+```
+
+**It can be stated that the complexity increases with increasing of n and that why the execution time increases almost 20 times with increases of n.**
+
+When the n=16, weight= 2000,
+
+```{r}
+brute_force_knapsack_16<-system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 2000))
+brute_force_knapsack_16
+```
+
+
+That means ,** with increasing values of n the execution time has also increased.**
+
+**Question : ** How much time does it takes to run the algorithm for n = 16 objects?
+**Answer : ** It takes more time than n=8 and n=12.
+
+#knapsack_dynamic():
+
+This algorithm calculates the mmaximum knapsack value by computing the solutions to the subsub-problems
+once and then store the solutions in a table, so that they can be reused (repeatedly) later.
+Input values are a data frame X and a highest capacity W and returns the maximum knapsack value and the elements of it. The input values are non-negative integer values. This algorithms complexity is O(Wn)
+
+
+```{r}
+ knapsack_dynamic(x=knapsack_objects[1:8,], W = 3500)
+ knapsack_dynamic(x=knapsack_objects[1:12,], W = 2000)
+ 
+```
+
+So the results are same as the results of Brute Force Algorithm.
+
+Now, the execution evaluation:
+When the n=12 and weight= 3500,
+
+```{r}
+knapsack_dynamic_12<-system.time(knapsack_dynamic(x=knapsack_objects[1:12,], W = 3500))
+knapsack_dynamic_12
+```
+
+**It can be stated that the execution time of knapsack_dynamic is almost 1/4 times than brute force algorihtm **
+
+When the n=500, and weight= 3500,
+
+```{r}
+knapsack_dynamic_500<-system.time(knapsack_dynamic(x=knapsack_objects[1:500,], W = 3500))
+knapsack_dynamic_500
+```
+
+
+so, **For large of n the execution time is larger than the time when n is small.**
+
+
+When the n=500, weight= 2000,
+
+```{r}
+knapsack_dynamic_500<-system.time(knapsack_dynamic(x=knapsack_objects[1:500,], W = 2000))
+knapsack_dynamic_500
+```
+
+However, **for smaller weight the execution time is small for the same number of values.**
+
+**Question : ** How much time does it takes to run the algorithm for n = 500 objects?
+**Answer : ** The execution time increases as the n increases by almost 9 times.
+
+For comparing with greedy: 
+
+When the n=800, weight= 3500,
+
+```{r}
+knapsack_dynamic(x=knapsack_objects[1:800,], W = 3500)
+knapsack_dynamic_800<-system.time(knapsack_dynamic(x=knapsack_objects[1:800,], W = 3500))
+knapsack_dynamic_800
+```
+
+#greedy_knapsack():
+This is an optimization solution which always makes the choice that looks best at the moment and adds it to the current subsolution. This algorithm will not give an exact result (but it can be shown that it will return at least 50% of the true maximum value), but it will reduce the computational complexity considerably (actually to O(nlogn) due to the sorting
+part of the algorithm). Input values are a data frame X and a highest capacity W and returns the maximum knapsack value and the elements of it. The input values are non-negative integer values.
+
+```{r}
+  greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+  greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
+```
+
+** So, it can be stated that, the algorithm did not give the exact value of maximum knapsack where the dynamic algorithm gives.**
+
+Now, the execution evaluation:
+When the n=800 and weight= 3500,
+
+```{r}
+greedy_knapsack_800<-system.time(greedy_knapsack(x = knapsack_objects[1:1200,], W = 3500))
+greedy_knapsack_800
+```
+
+**As compared to dynamic and brute force algorithm the greedy calculates the result with a minimum amount of time. The complexity is considarbly less than the other two.**
+
+When the n=1000000 and weight= 3500,
+
+```{r}
+greedy_knapsack_1000000<-system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
+greedy_knapsack_1000000
+```
+
+As well, the increased value of n increases the execution time.
+
+
+**Question :** How much time does it takes to run the algorithm for n = 1000000 objects?
+**Answer : **  The amount of time increases is almost 150% as compared to previous n.
+
+#TestSuit:
+
+Testsuits are available for the functions **brute_force_knapsack()** & **greedy_knapsack()**. Students are supposed to create a testcase based on the two testsuits for **knapsack_dynamic()** function.
+Possible testcases are created and tested in R.
+
+```{r,eval=FALSE}
+test_that("Correct object is returned", {
+  expect_silent(dk <- knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500))
+  expect_named(dk, c("value", "elements"))
+})
+test_that("Function return correct results.", {
+  dk <- knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
+  expect_equal(round(dk$value), 16770)
+  expect_true(all(round(dk$elements) %in% c(5, 8)))}
+
+```
+
+
+#Identifying lineprof :
+
+```{r,eval=FALSE}
+library("RCourseLab6")
+library(lineprof)
+xx<-lineprof(a<-brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
+xx
+xy<-lineprof(b<-knapsack_dynamic(x = knapsack_objects[1:12,], W = 3500))
+xy
+xz<-lineprof(c<-greedy_knapsack(x = knapsack_objects[1:12000,], W = 3500))
+xz
+```
+
+using shine we found
+
+```{r, eval=FALSE}
+shine(xx)
+shine(xy)
+shine(xz)
+```
+
+![Brute Force Line Profiling](./brute.png)
+
+
+
+![Dynamic Algorithm Line Profiling](./Dynamic.png)
+
+![Greedy Hurestic Line Profiling](./greedy.png)
+
+#References:
+ https://en.wikipedia.org/wiki/Knapsack_problem
+ 
+ 
+
+
+

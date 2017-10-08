@@ -1,0 +1,18 @@
+Package: RCourseLab6
+Type: Package
+Title: A package for Lab 6 Assigments
+Version: 1.0
+Date: 2017-10-06
+Authors@R: c(
+    person("Farhana", "Chowdhury Tondra", email = "farch587@student.liu.se", role = "cre"),
+    person("Syeda", "Farha Shazmeen", email = "syesh076@student.liu.se", role = "aut"))
+Maintainer: Farhana Chowdhury Tondra <tondralok@yahoo.com>
+Description: Package contains of implementations of the algorithm ,Brute force search,Dynamic programming, Greedy heuristics.
+License: CC0
+Suggests: testthat,
+    knitr,
+    rmarkdown
+RoxygenNote: 6.0.1
+LazyData: true
+Depends: R (>= 2.10)
+VignetteBuilder: knitr
