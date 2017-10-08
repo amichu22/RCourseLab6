@@ -81,7 +81,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <p><strong>RCourseLab6</strong> is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i with weights w~i. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package <strong>RCourseLab</strong> implements <strong>brute force algorithm</strong>,<strong>dynamic programming</strong> &amp; <strong>greedy heuristic approach</strong>.</p>
-<p>As usual to the other packages there is <strong>/R</strong> folder, where all three implemented algorithms are kept as .R file. <strong>/Data</strong> folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. <strong>/test</strong> folder contains implemented testcases for the functions. All .rd files are situdated inside <strong>/man</strong> folder and .Rmd file containing the vignette documentation is inside the <strong>/vignettes</strong> folder.</p>
+<p>As we have created packages in earlier labs , similar to that there is <strong>/R</strong> folder, where all three implemented algorithms are kept as .R file. <strong>/Data</strong> folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. <strong>/test</strong> folder contains implemented testcases for the functions. All .rd files are situdated inside <strong>/man</strong> folder and .Rmd file containing the vignette documentation is inside the <strong>/vignettes</strong> folder.</p>
 <div id="knapsack_objects" class="section level1">
 <h1>knapsack_objects:</h1>
 <p>This file contains a dataframe where a number of items n, each with a weight w<sub>i</sub> and a value v<sub>i</sub>.</p>
@@ -99,28 +99,28 @@ knapsack_objects &lt;-
 </div>
 <div id="brute_force_knapsack" class="section level1">
 <h1>brute_force_knapsack()</h1>
-<p>The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach is of complexity O(2<sup>n</sup>) since all possible combinations 2<sup>n</sup> needs to be evaluated.</p>
+<p>The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach has a time complexity of O(2<sup>n</sup>) since all possible combinations 2<sup>n</sup> needs to be evaluated.</p>
 <p>This function takes a data frame X and a highest capacity W and returns the maximum knapsack value and the elements of it. The input values are non-negative integer values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">8</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)
  <span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">2000</span>)</code></pre></div>
 <p>When the n=12 and weight= 3500,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RCourseLab6)
-brute_force_knapsack_<span class="dv">8</span>&lt;-<span class="kw">system.time</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
-brute_force_knapsack_<span class="dv">8</span></code></pre></div>
+brute_force_knapsack_<span class="dv">12</span>&lt;-<span class="kw">system.time</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
+brute_force_knapsack_<span class="dv">12</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.12    0.00    0.13</code></pre>
+##    0.01    0.00    0.02</code></pre>
 <p>When the n=16, and weight= 3500,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">brute_force_knapsack_<span class="dv">16</span>&lt;-<span class="kw">system.time</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 brute_force_knapsack_<span class="dv">16</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##     0.2     0.0     0.2</code></pre>
-<p><strong>It can be stated that the complexity increases with increasing of n and that why the execution time increases almost 20 times with increases of n.</strong></p>
+##    0.18    0.00    0.17</code></pre>
+<p><strong>It can be stated that the time complexity(system time) increases with increasing of n</strong></p>
 <p>When the n=16, weight= 2000,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">brute_force_knapsack_<span class="dv">16</span>&lt;-<span class="kw">system.time</span>(<span class="kw">brute_force_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">16</span>,], <span class="dt">W =</span> <span class="dv">2000</span>))
 brute_force_knapsack_<span class="dv">16</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.14    0.00    0.14</code></pre>
-<p>That means ,** with increasing values of n the execution time has also increased.**</p>
+##    0.17    0.00    0.18</code></pre>
+<p>That means ,<strong>with increasing values of n the execution time has also increased.</strong></p>
 <p><strong>Question : </strong> How much time does it takes to run the algorithm for n = 16 objects? <strong>Answer : </strong> It takes more time than n=8 and n=12.</p>
 </div>
 <div id="knapsack_dynamic" class="section level1">
@@ -143,22 +143,21 @@ brute_force_knapsack_<span class="dv">16</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knapsack_dynamic_<span class="dv">12</span>&lt;-<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(<span class="dt">x=</span>knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 knapsack_dynamic_<span class="dv">12</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.03    0.00    0.03</code></pre>
-<p><strong>It can be stated that the execution time of knapsack_dynamic is almost 1/4 times than brute force algorihtm </strong></p>
-<p>When the n=500, and weight= 3500,</p>
+##    0.01    0.00    0.02</code></pre>
+<p><strong>It can be stated that the execution time(system time) of knapsack_dynamic is compartively less compared to brute force algorihtm </strong></p>
+<p><br /> <strong>Question : </strong> How much time does it takes to run the algorithm for n = 500 objects?<br /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knapsack_dynamic_<span class="dv">500</span>&lt;-<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(<span class="dt">x=</span>knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 knapsack_dynamic_<span class="dv">500</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.86    0.00    0.86</code></pre>
-<p>so, <strong>For large of n the execution time is larger than the time when n is small.</strong></p>
+##    0.84    0.00    0.84</code></pre>
+<p><strong>Answer : </strong> The execution time increases as the n increases .</p>
+<p>so, <strong>For larger values of n,execution times increases compared to smaller values of n </strong></p>
 <p>When the n=500, weight= 2000,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knapsack_dynamic_<span class="dv">500</span>&lt;-<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(<span class="dt">x=</span>knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>,], <span class="dt">W =</span> <span class="dv">2000</span>))
 knapsack_dynamic_<span class="dv">500</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    0.34    0.00    0.35</code></pre>
-<p>However, <strong>for smaller weight the execution time is small for the same number of values.</strong></p>
-<p><strong>Question : </strong> How much time does it takes to run the algorithm for n = 500 objects? <strong>Answer : </strong> The execution time increases as the n increases by almost 9 times.</p>
-<p>For comparing with greedy:</p>
+##    0.31    0.00    0.32</code></pre>
+<p>However, <strong>for smaller weight the execution time is less for the same number of values.</strong></p>
 <p>When the n=800, weight= 3500,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knapsack_dynamic</span>(<span class="dt">x=</span>knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">800</span>,], <span class="dt">W =</span> <span class="dv">3500</span>)</code></pre></div>
 <pre><code>## $value
@@ -170,7 +169,7 @@ knapsack_dynamic_<span class="dv">500</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knapsack_dynamic_<span class="dv">800</span>&lt;-<span class="kw">system.time</span>(<span class="kw">knapsack_dynamic</span>(<span class="dt">x=</span>knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">800</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 knapsack_dynamic_<span class="dv">800</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    1.36    0.00    1.41</code></pre>
+##    1.22    0.02    1.24</code></pre>
 </div>
 <div id="greedy_knapsack" class="section level1">
 <h1>greedy_knapsack():</h1>
@@ -192,18 +191,17 @@ knapsack_dynamic_<span class="dv">800</span></code></pre></div>
 ## [29] 1059  500 1090  794 1033</code></pre>
 <p>** So, it can be stated that, the algorithm did not give the exact value of maximum knapsack where the dynamic algorithm gives.**</p>
 <p>Now, the execution evaluation: When the n=800 and weight= 3500,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">greedy_knapsack_<span class="dv">800</span>&lt;-<span class="kw">system.time</span>(<span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">1200</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">greedy_knapsack_<span class="dv">800</span>&lt;-<span class="kw">system.time</span>(<span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">800</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 greedy_knapsack_<span class="dv">800</span></code></pre></div>
 <pre><code>##    user  system elapsed 
 ##       0       0       0</code></pre>
-<p><strong>As compared to dynamic and brute force algorithm the greedy calculates the result with a minimum amount of time. The complexity is considarbly less than the other two.</strong></p>
-<p>When the n=1000000 and weight= 3500,</p>
+<p><strong>As compared to dynamic and brute force algorithm the greedy calculates the result with a minimum amount of time. The complexity is considerably less than the other mentioned algorithms.</strong></p>
+<p>When the n=1000000 and weight= 3500,<br /> <strong>Question :</strong> How much time does it takes to run the algorithm for n = 1000000 objects?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">greedy_knapsack_<span class="dv">1000000</span>&lt;-<span class="kw">system.time</span>(<span class="kw">greedy_knapsack</span>(<span class="dt">x =</span> knapsack_objects[<span class="dv">1</span><span class="op">:</span><span class="dv">1000000</span>,], <span class="dt">W =</span> <span class="dv">3500</span>))
 greedy_knapsack_<span class="dv">1000000</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##    1.94    0.04    2.03</code></pre>
-<p>As well, the increased value of n increases the execution time.</p>
-<p><strong>Question :</strong> How much time does it takes to run the algorithm for n = 1000000 objects? <strong>Answer : </strong> The amount of time increases is almost 150% as compared to previous n.</p>
+##    1.42    0.03    1.45</code></pre>
+<p><strong>Answer : </strong> The amount of time increases as n increases.</p>
 </div>
 <div id="testsuit" class="section level1">
 <h1>TestSuit:</h1>
