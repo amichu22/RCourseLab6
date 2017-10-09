@@ -11,7 +11,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}{inputenc}
 ---
 
+<<<<<<< HEAD
 **RCourseLab6** is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i~ with weights w~i~. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package **RCourseLab** implements **brute force algorithm**,**dynamic programming** & **greedy heuristic approach**. 
+=======
+**RCourseLab6** is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i~ with weights w~i. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package **RCourseLab** implements **brute force algorithm**,**dynamic programming** & **greedy heuristic approach**. 
+>>>>>>> 7525d40c53d19166a3ca1c1ab3f99f68b90fcee2
 
 
 
@@ -98,7 +102,7 @@ brute_force_knapsack_12
 
 ```
 ##    user  system elapsed 
-##    0.09    0.02    0.11
+##    0.16    0.00    0.16
 ```
 
 When the n=16, and weight= 3500,
@@ -111,7 +115,7 @@ brute_force_knapsack_16
 
 ```
 ##    user  system elapsed 
-##    0.22    0.00    0.22
+##    0.27    0.00    0.30
 ```
 
 <<<<<<< HEAD
@@ -130,7 +134,7 @@ brute_force_knapsack_16
 
 ```
 ##    user  system elapsed 
-##    0.20    0.00    0.22
+##    0.22    0.00    0.22
 ```
 
 
@@ -202,7 +206,7 @@ knapsack_dynamic_12
 
 ```
 ##    user  system elapsed 
-##    0.01    0.00    0.01
+##    0.01    0.00    0.03
 ```
 
 <<<<<<< HEAD
@@ -223,7 +227,7 @@ knapsack_dynamic_500
 
 ```
 ##    user  system elapsed 
-##    1.03    0.00    1.05
+##    1.30    0.00    1.35
 ```
 
 **Answer : ** The execution time increases as the n increases .
@@ -245,7 +249,7 @@ knapsack_dynamic_500
 
 ```
 ##    user  system elapsed 
-##    0.34    0.00    0.34
+##    0.48    0.01    0.52
 ```
 
 <<<<<<< HEAD
@@ -283,7 +287,7 @@ knapsack_dynamic_800
 
 ```
 ##    user  system elapsed 
-##    1.50    0.02    1.57
+##    1.36    0.00    1.36
 ```
 
 ##greedy_knapsack():
@@ -366,7 +370,7 @@ greedy_knapsack_1000000
 
 ```
 ##    user  system elapsed 
-##    1.63    0.05    1.68
+##    1.64    0.00    1.64
 ```
 <<<<<<< HEAD
 
