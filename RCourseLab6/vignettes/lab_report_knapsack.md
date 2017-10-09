@@ -15,7 +15,7 @@ vignette: >
 
 
 
-As usual to the other packages there is **/R** folder, where all three implemented algorithms are kept as .R file. **/Data** folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. **/test** folder contains implemented testcases for the functions. All .rd files are situdated inside **/man** folder and .Rmd file containing the vignette documentation is inside the **/vignettes** folder.
+As we have created packages in earlier labs , similar to that there is **/R** folder, where all three implemented algorithms are kept as .R file. **/Data** folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. **/test** folder contains implemented testcases for the functions. All .rd files are situdated inside **/man** folder and .Rmd file containing the vignette documentation is inside the **/vignettes** folder.
 
 
 
@@ -52,7 +52,7 @@ And to load data ,
 
 ##brute_force_knapsack()
 
-The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach is of complexity O(2^n^) since all possible combinations 2^n^ needs to be evaluated.
+The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach has a time complexity of O(2^n^) since all possible combinations 2^n^ needs to be evaluated.
 
 This function takes a data frame X and a highest capacity W and returns the maximum knapsack value and the elements of it. The input values are non-negative integer values.
 
@@ -92,13 +92,13 @@ When the n=12 and weight= 3500,
 
 ```r
 library(RCourseLab6)
-brute_force_knapsack_8<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
-brute_force_knapsack_8
+brute_force_knapsack_12<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
+brute_force_knapsack_12
 ```
 
 ```
 ##    user  system elapsed 
-##    0.09    0.00    0.09
+##    0.12    0.00    0.12
 ```
 
 When the n=16, and weight= 3500,
@@ -114,7 +114,11 @@ brute_force_knapsack_16
 ##    0.22    0.00    0.22
 ```
 
+<<<<<<< HEAD
 **It can be stated that the complexity increases with increasing of n and that why the execution time increases almost 2 times with increases of n.**
+=======
+**It can be stated that the time complexity(system time) increases with increasing of n**
+>>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
 When the n=16, weight= 2000,
 
@@ -126,11 +130,11 @@ brute_force_knapsack_16
 
 ```
 ##    user  system elapsed 
-##    0.25    0.00    0.25
+##    0.21    0.00    0.21
 ```
 
 
-That means ,** with increasing values of n the execution time has also increased.**
+That means ,**with increasing values of n the execution time has also increased.**
 
 **Question : ** How much time does it takes to run the algorithm for n = 16 objects?
 
@@ -198,13 +202,19 @@ knapsack_dynamic_12
 
 ```
 ##    user  system elapsed 
-##    0.04    0.00    0.03
+##    0.01    0.00    0.02
 ```
 
+<<<<<<< HEAD
 **It can be stated that the execution time of knapsack_dynamic is far less than brute force algorihtm **
 
 When the n=500, and weight= 3500,
+=======
+**It can be stated that the execution time(system time) of knapsack_dynamic is compartively less compared to  brute force algorihtm **
+>>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
+<br/>
+**Question : ** How much time does it takes to run the algorithm for n = 500 objects?<br />
 
 ```r
 knapsack_dynamic_500<-system.time(knapsack_dynamic(x=knapsack_objects[1:500,], W = 3500))
@@ -216,8 +226,13 @@ knapsack_dynamic_500
 ##    0.89    0.00    0.89
 ```
 
+**Answer : ** The execution time increases as the n increases .
 
+<<<<<<< HEAD
 so, **For large n the execution time is greater than the execution time of small n.**
+=======
+so, **For larger values of n,execution times increases compared to smaller values of n  **
+>>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
 
 When the n=500, weight= 2000,
@@ -230,16 +245,20 @@ knapsack_dynamic_500
 
 ```
 ##    user  system elapsed 
-##    0.36    0.00    0.36
+##    0.34    0.00    0.34
 ```
 
+<<<<<<< HEAD
 However, **for smaller capacity, the execution time is smaller for the same number of values.**
 
 **Question : ** How much time does it takes to run the algorithm for n = 500 objects?
 
 **Answer : ** The execution time increases as the n increases.
+=======
+However, **for smaller weight the execution time is less for the same number of values.**
 
-For comparing with greedy: 
+>>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
+
 
 When the n=800, weight= 3500,
 
@@ -264,7 +283,7 @@ knapsack_dynamic_800
 
 ```
 ##    user  system elapsed 
-##    1.43    0.01    1.45
+##    1.35    0.00    1.34
 ```
 
 ##greedy_knapsack():
@@ -326,7 +345,7 @@ When the n=800 and weight= 3500,
 
 
 ```r
-greedy_knapsack_800<-system.time(greedy_knapsack(x = knapsack_objects[1:1200,], W = 3500))
+greedy_knapsack_800<-system.time(greedy_knapsack(x = knapsack_objects[1:800,], W = 3500))
 greedy_knapsack_800
 ```
 
@@ -335,10 +354,10 @@ greedy_knapsack_800
 ##       0       0       0
 ```
 
-**As compared to dynamic and brute force algorithm the greedy calculates the result with a minimum amount of time. The complexity is considarbly less than the other two.**
+**As compared to dynamic and brute force algorithm the greedy calculates the result with a minimum amount of time. The complexity is considerably less than the other mentioned algorithms.**
 
-When the n=1000000 and weight= 3500,
-
+When the n=1000000 and weight= 3500,<br />
+**Question :** How much time does it takes to run the algorithm for n = 1000000 objects?
 
 ```r
 greedy_knapsack_1000000<-system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
@@ -347,13 +366,17 @@ greedy_knapsack_1000000
 
 ```
 ##    user  system elapsed 
-##    1.64    0.04    1.67
+##    1.60    0.03    1.63
 ```
+<<<<<<< HEAD
 
 As well, the increased value of n increases the execution time.
 
 
 **Question :** How much time does it takes to run the algorithm for n = 1000000 objects?
+=======
+**Answer : **  The amount of time increases as n increases.
+>>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
 **Answer : **  The amount of time increases is as compared to previous n.
 

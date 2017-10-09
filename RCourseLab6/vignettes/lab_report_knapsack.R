@@ -43,8 +43,8 @@ v=runif(n = n, 0, 10000)
 
 ## ------------------------------------------------------------------------
 library(RCourseLab6)
-brute_force_knapsack_8<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
-brute_force_knapsack_8
+brute_force_knapsack_12<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
+brute_force_knapsack_12
 
 
 ## ------------------------------------------------------------------------
@@ -108,7 +108,7 @@ knapsack_dynamic_800
   greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
 
 ## ------------------------------------------------------------------------
-greedy_knapsack_800<-system.time(greedy_knapsack(x = knapsack_objects[1:1200,], W = 3500))
+greedy_knapsack_800<-system.time(greedy_knapsack(x = knapsack_objects[1:800,], W = 3500))
 greedy_knapsack_800
 
 ## ------------------------------------------------------------------------

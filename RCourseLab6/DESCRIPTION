@@ -14,6 +14,6 @@ Suggests: testthat,
     rmarkdown
 RoxygenNote: 6.0.1
 LazyData: true
-Depends: R (>= 2.10)
-Imports: Rcpp
+Depends: R (>= 2.10),
+         Rcpp
 VignetteBuilder: knitr
