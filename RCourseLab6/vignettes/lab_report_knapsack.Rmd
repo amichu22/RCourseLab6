@@ -11,7 +11,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}{inputenc}
 ---
 
-**RCourseLab6** is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i with weights w~i. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package **RCourseLab** implements **brute force algorithm**,**dynamic programming** & **greedy heuristic approach**. 
+**RCourseLab6** is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i~ with weights w~i. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package **RCourseLab** implements **brute force algorithm**,**dynamic programming** & **greedy heuristic approach**. 
 
 
 
