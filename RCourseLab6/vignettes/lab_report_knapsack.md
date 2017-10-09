@@ -2,7 +2,7 @@
 title: <center>"A package of knapsack problem solution using three algorithms"</center>
 author: <center>"Farhana chowdhury Tondra,Syeda Farha Shazmeen"</center>
 subtitle: <center>"farch587@student.liu.se, syesh076@student.liu.se"</center>
-date: "`r Sys.Date()`"
+date: "2017-10-09"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{A package of knapsack problem solution using three algothims}
@@ -15,7 +15,7 @@ vignette: >
 
 
 
-As we have created packages in earlier labs , similar to that there is **/R** folder, where all three implemented algorithms are kept as .R file. **/Data** folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. **/test** folder contains implemented testcases for the functions. All .rd files are situdated inside **/man** folder and .Rmd file containing the vignette documentation is inside the **/vignettes** folder.
+As usual to the other packages there is **/R** folder, where all three implemented algorithms are kept as .R file. **/Data** folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. **/test** folder contains implemented testcases for the functions. All .rd files are situdated inside **/man** folder and .Rmd file containing the vignette documentation is inside the **/vignettes** folder.
 
 
 
@@ -24,7 +24,8 @@ As we have created packages in earlier labs , similar to that there is **/R** fo
 This file contains a dataframe where a number of items n, each with a weight w~i~ and a value v~i~.
 
 
-```{r}
+
+```r
 set.seed(42)
 n <- 2000
 knapsack_objects <-
@@ -36,28 +37,30 @@ v=runif(n = n, 0, 10000)
 
 data was saved by 
 
-```{r,eval=FALSE}
+
+```r
 #devtools::use_data("knapsack_objects", pkg="RCourseLab4")
 ```
 
 And to load data , 
 
-```{r}
+
+```r
 #load("./knapsack_objects.rda")
 ```
 
 
 ##brute_force_knapsack()
 
-The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach has a time complexity of O(2^n^) since all possible combinations 2^n^ needs to be evaluated.
+The only solution that is guaranteed to give a correct answer in all situations for the knapsack problem is using brute-force search, i.e. going through all possible alternatives and return the maximum value found. This approach is of complexity O(2^n^) since all possible combinations 2^n^ needs to be evaluated.
 
 This function takes a data frame X and a highest capacity W and returns the maximum knapsack value and the elements of it. The input values are non-negative integer values.
 
 
 The code is implemented using below psuedocode:
 
-```{r, eval=FALSE}
 
+```r
 for i = 1 to 2^n^ do
       j <- n
       tempWeight<-0
@@ -75,49 +78,59 @@ for i = 1 to 2^n^ do
           bestWeight<-tempWeight
           bestChoice<-A
     return bestChoice
-    
-    
 ```
 
 
-```{r,eval=FALSE}
+
+```r
  brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500)
  brute_force_knapsack(x = knapsack_objects[1:12,], W = 2000)
- 
-  
 ```
 
 When the n=12 and weight= 3500,
 
-```{r}
-library(RCourseLab6)
-brute_force_knapsack_12<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
-brute_force_knapsack_12
 
+```r
+library(RCourseLab6)
+brute_force_knapsack_8<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
+brute_force_knapsack_8
+```
+
+```
+##    user  system elapsed 
+##    0.09    0.00    0.09
 ```
 
 When the n=16, and weight= 3500,
 
-```{r}
+
+```r
 brute_force_knapsack_16<-system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 3500))
 brute_force_knapsack_16
 ```
 
-<<<<<<< HEAD
+```
+##    user  system elapsed 
+##    0.22    0.00    0.22
+```
+
 **It can be stated that the complexity increases with increasing of n and that why the execution time increases almost 2 times with increases of n.**
-=======
-**It can be stated that the time complexity(system time) increases with increasing of n**
->>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
 When the n=16, weight= 2000,
 
-```{r}
+
+```r
 brute_force_knapsack_16<-system.time(brute_force_knapsack(x = knapsack_objects[1:16,], W = 2000))
 brute_force_knapsack_16
 ```
 
+```
+##    user  system elapsed 
+##    0.25    0.00    0.25
+```
 
-That means ,**with increasing values of n the execution time has also increased.**
+
+That means ,** with increasing values of n the execution time has also increased.**
 
 **Question : ** How much time does it takes to run the algorithm for n = 16 objects?
 
@@ -131,8 +144,8 @@ Input values are a data frame X and a highest capacity W and returns the maximum
 
 The followed pseudocode is given below:
 
-```{r, eval=FALSE}
 
+```r
 for i = 0 to N do
      for j = 0 to Capacity
           if j < Weights[i] then
@@ -147,10 +160,29 @@ return Table[N, Capacity]
 
 
 
-```{r}
+
+```r
  knapsack_dynamic(x=knapsack_objects[1:8,], W = 3500)
+```
+
+```
+## $value
+## [1] 16770
+## 
+## $elements
+## [1] 5 8
+```
+
+```r
  knapsack_dynamic(x=knapsack_objects[1:12,], W = 2000)
- 
+```
+
+```
+## $value
+## [1] 15428
+## 
+## $elements
+## [1] 3 8
 ```
 
 So the results are same as the results of Brute Force Algorithm.
@@ -158,60 +190,81 @@ So the results are same as the results of Brute Force Algorithm.
 Now, the execution evaluation:
 When the n=12 and weight= 3500,
 
-```{r}
+
+```r
 knapsack_dynamic_12<-system.time(knapsack_dynamic(x=knapsack_objects[1:12,], W = 3500))
 knapsack_dynamic_12
 ```
 
-<<<<<<< HEAD
+```
+##    user  system elapsed 
+##    0.04    0.00    0.03
+```
+
 **It can be stated that the execution time of knapsack_dynamic is far less than brute force algorihtm **
 
 When the n=500, and weight= 3500,
-=======
-**It can be stated that the execution time(system time) of knapsack_dynamic is compartively less compared to  brute force algorihtm **
->>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
-<br/>
-**Question : ** How much time does it takes to run the algorithm for n = 500 objects?<br />
-```{r}
+
+```r
 knapsack_dynamic_500<-system.time(knapsack_dynamic(x=knapsack_objects[1:500,], W = 3500))
 knapsack_dynamic_500
 ```
 
-**Answer : ** The execution time increases as the n increases .
+```
+##    user  system elapsed 
+##    0.89    0.00    0.89
+```
 
-<<<<<<< HEAD
+
 so, **For large n the execution time is greater than the execution time of small n.**
-=======
-so, **For larger values of n,execution times increases compared to smaller values of n  **
->>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
 
 When the n=500, weight= 2000,
 
-```{r}
+
+```r
 knapsack_dynamic_500<-system.time(knapsack_dynamic(x=knapsack_objects[1:500,], W = 2000))
 knapsack_dynamic_500
 ```
 
-<<<<<<< HEAD
+```
+##    user  system elapsed 
+##    0.36    0.00    0.36
+```
+
 However, **for smaller capacity, the execution time is smaller for the same number of values.**
 
 **Question : ** How much time does it takes to run the algorithm for n = 500 objects?
 
 **Answer : ** The execution time increases as the n increases.
-=======
-However, **for smaller weight the execution time is less for the same number of values.**
 
->>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
-
+For comparing with greedy: 
 
 When the n=800, weight= 3500,
 
-```{r}
+
+```r
 knapsack_dynamic(x=knapsack_objects[1:800,], W = 3500)
+```
+
+```
+## $value
+## [1] 195283
+## 
+## $elements
+##  [1]  37  43  55  80  92 110 117 229 234 243 255 282 288 290 300 303 332
+## [18] 345 346 400 436 472 500 537 574 577 599 719 747 764 776 794
+```
+
+```r
 knapsack_dynamic_800<-system.time(knapsack_dynamic(x=knapsack_objects[1:800,], W = 3500))
 knapsack_dynamic_800
+```
+
+```
+##    user  system elapsed 
+##    1.43    0.01    1.45
 ```
 
 ##greedy_knapsack():
@@ -223,8 +276,8 @@ part of the algorithm). Input values are a data frame X and a highest capacity W
 Below mentioned pseudocode is used to construct the greedy function:
 
 
-```{r, eval=FALSE}
 
+```r
 Integer CumWeight
 Compute the value-to-weight ratios r~i~ = v~i~ / w~i~ ,i = 1, …, N, for the items given
 
@@ -238,9 +291,32 @@ for all items do
 ```
 
 
-```{r}
+
+```r
   greedy_knapsack(x = knapsack_objects[1:800,], W = 3500)
+```
+
+```
+## $value
+## [1] 192647
+## 
+## $elements
+##  [1]  92 574 472  80 110 537 332 117  37 776 577 288 234 255 500 794  55
+## [18] 290 436 346 282 764 599 303 345 300 243  43 747  35  77 229 719 564
+```
+
+```r
   greedy_knapsack(x = knapsack_objects[1:1200,], W = 2000)
+```
+
+```
+## $value
+## [1] 212337
+## 
+## $elements
+##  [1]   92  574  472   80  110  840  537 1000  332  117   37 1197 1152  947
+## [15]  904  776  577  288 1147 1131  234  255 1006  833 1176 1092  873  828
+## [29] 1059  500 1090  794 1033
 ```
 
 ** So, it can be stated that, the algorithm did not give the exact value of maximum knapsack where the dynamic algorithm gives.**
@@ -248,28 +324,36 @@ for all items do
 Now, the execution evaluation:
 When the n=800 and weight= 3500,
 
-```{r}
-greedy_knapsack_800<-system.time(greedy_knapsack(x = knapsack_objects[1:800,], W = 3500))
+
+```r
+greedy_knapsack_800<-system.time(greedy_knapsack(x = knapsack_objects[1:1200,], W = 3500))
 greedy_knapsack_800
 ```
 
-**As compared to dynamic and brute force algorithm the greedy calculates the result with a minimum amount of time. The complexity is considerably less than the other mentioned algorithms.**
+```
+##    user  system elapsed 
+##       0       0       0
+```
 
-When the n=1000000 and weight= 3500,<br />
-**Question :** How much time does it takes to run the algorithm for n = 1000000 objects?
-```{r}
+**As compared to dynamic and brute force algorithm the greedy calculates the result with a minimum amount of time. The complexity is considarbly less than the other two.**
+
+When the n=1000000 and weight= 3500,
+
+
+```r
 greedy_knapsack_1000000<-system.time(greedy_knapsack(x = knapsack_objects[1:1000000,], W = 3500))
 greedy_knapsack_1000000
 ```
-<<<<<<< HEAD
+
+```
+##    user  system elapsed 
+##    1.64    0.04    1.67
+```
 
 As well, the increased value of n increases the execution time.
 
 
 **Question :** How much time does it takes to run the algorithm for n = 1000000 objects?
-=======
-**Answer : **  The amount of time increases as n increases.
->>>>>>> 7e45e55ca2fc37218b10915fa9d1ad1ece9c432e
 
 **Answer : **  The amount of time increases is as compared to previous n.
 
@@ -279,7 +363,8 @@ Testsuits are available for the functions **brute_force_knapsack()** & **greedy_
 Possible testcases are created and tested in R.
 
 
-```{r,eval=FALSE}
+
+```r
 test_that("Correct object is returned", {
   expect_silent(dk <- knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500))
   expect_named(dk, c("value", "elements"))
@@ -288,13 +373,13 @@ test_that("Function return correct results.", {
   dk <- knapsack_dynamic(x = knapsack_objects[1:8,], W = 3500)
   expect_equal(round(dk$value), 16770)
   expect_true(all(round(dk$elements) %in% c(5, 8)))}
-
 ```
 
 
 ##Identifying lineprof :
 
-```{r,eval=FALSE}
+
+```r
 library("RCourseLab6")
 library(lineprof)
 xw<-lineprof(a<-brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500, fast=TRUE))
@@ -309,7 +394,8 @@ xz
 
 using shine we found
 
-```{r, eval=FALSE}
+
+```r
 shine(xx)
 shine(xy)
 shine(xz)
@@ -329,7 +415,8 @@ shine(xz)
 
 For improving code in bruteforce function , a new argument logical is used, which is by default FALSE. A chunk of C++ code is used inside the function foe checking the improvement. The part which is modified executes R code when fast=FALSE and when fast=TRUE , it executes Rcpp code.  
 
-```{r, eval=FALSE}
+
+```r
 else
         {
         cppFunction(' int abc(int tempValue, int bestValue, int tempWeight,
@@ -349,7 +436,8 @@ else
 
 However, after executing the code , we found out that the use of c++ code in this logic is inapproriate as it increases the execution time. And sometimes R session aborted for this. 
 
-```{r, eval=FALSE}
+
+```r
 library(RCourseLab6)
 xx<-system.time(brute_force_knapsack(x = knapsack_objects[1:8,], W = 3500,fast=TRUE))
 xy<-system.time(brute_force_knapsack(x = knapsack_objects[1:12,], W = 3500))
@@ -369,7 +457,8 @@ xy
 
 This package can be installed using below command.    
 
-```{r,, eval=FALSE}
+
+```r
 devtools::install_github("tondralok/RCourseLab6/RCourseLab6")
 ```
 
