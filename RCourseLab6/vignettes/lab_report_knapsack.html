@@ -201,7 +201,7 @@ hr {
 </head>
 
 <body>
-<p><strong>RCourseLab6</strong> is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i with weights w~i. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package <strong>RCourseLab</strong> implements <strong>brute force algorithm</strong>,<strong>dynamic programming</strong> &amp; <strong>greedy heuristic approach</strong>. </p>
+<p><strong>RCourseLab6</strong> is entitled for the students who took the Advanced R course. This lab is based on popular knapsack problem which is adiscrete optimization problem. A knapsack can take upto highest capacity W and we have n number of items which have values v~i~ with weights w~i~. To get the the largest value of the elements that can be added to the knapsack we have to solve the problem. The problem can be solved by several approaches.Among them the package <strong>RCourseLab</strong> implements <strong>brute force algorithm</strong>,<strong>dynamic programming</strong> &amp; <strong>greedy heuristic approach</strong>. </p>
 
 <p>As we have created packages in earlier labs , similar to that there is <strong>/R</strong> folder, where all three implemented algorithms are kept as .R file. <strong>/Data</strong> folder contains a.rda file of knapsack_objects which is a dataframe consisting of values and weights. <strong>/test</strong> folder contains implemented testcases for the functions. All .rd files are situdated inside <strong>/man</strong> folder and .Rmd file containing the vignette documentation is inside the <strong>/vignettes</strong> folder.</p>
 
@@ -267,7 +267,7 @@ brute_force_knapsack_12
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##    0.12    0.00    0.12
+##    0.09    0.02    0.11
 </code></pre>
 
 <p>When the n=16, and weight= 3500,</p>
@@ -309,7 +309,7 @@ brute_force_knapsack_16
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##    0.21    0.00    0.21
+##    0.20    0.00    0.22
 </code></pre>
 
 <p>That means ,<strong>with increasing values of n the execution time has also increased.</strong></p>
@@ -368,7 +368,7 @@ knapsack_dynamic_12
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##    0.01    0.00    0.02
+##    0.01    0.00    0.01
 </code></pre>
 
 <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
@@ -402,7 +402,7 @@ knapsack_dynamic_500
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##    0.89    0.00    0.89
+##    1.03    0.00    1.05
 </code></pre>
 
 <p>*<em>Answer : *</em> The execution time increases as the n increases .</p>
@@ -482,7 +482,7 @@ knapsack_dynamic_800
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##    1.35    0.00    1.34
+##    1.50    0.02    1.57
 </code></pre>
 
 <p>##greedy_knapsack():</p>
@@ -550,7 +550,7 @@ greedy_knapsack_1000000
 </code></pre>
 
 <pre><code>##    user  system elapsed 
-##    1.60    0.03    1.63
+##    1.63    0.05    1.68
 </code></pre>
 
 <p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
